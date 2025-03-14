@@ -13,3 +13,11 @@ Epoch 8: SAM Test Error: 27.48%
 Epoch 9: SAM Test Error: 24.09%
 Epoch 10: SAM Test Error: 33.02%
 Epoch 11: SAM Test Error: 24.36%
+Epoch 12: SAM Test Error: 24.48%
+Epoch 13: SAM Test Error: 18.86%
+Epoch 14: SAM Test Error: 17.88%
+Epoch 15: SAM Test Error: 17.78%
+Epoch 16: SAM Test Error: 19.09%
+Epoch 17: SAM Test Error: 17.03%
+Epoch 18: SAM Test Error: 15.98%
+Epoch 19: SAM Test Error: 16.91%
