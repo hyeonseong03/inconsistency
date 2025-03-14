@@ -1,6 +1,0 @@
-lrning-mainserver
-Files already downloaded and verified
-Files already downloaded and verified
-Files already downloaded and verified
-Epoch 1/300: IAM Test Error: 50.86%, Inconsistency: 7.478097347382023e-09
-Epoch 2/300: IAM Test Error: 46.99%, Inconsistency: 1.1540107926941887e-08
