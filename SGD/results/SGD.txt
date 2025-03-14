@@ -1,0 +1,333 @@
+node1
+Files already downloaded and verified
+Files already downloaded and verified
+Epoch 1/300: SGD Test Error: 49.72%
+Epoch 2/300: SGD Test Error: 42.74%
+Epoch 3/300: SGD Test Error: 33.70%
+Epoch 4/300: SGD Test Error: 24.66%
+Epoch 5/300: SGD Test Error: 27.73%
+Epoch 6/300: SGD Test Error: 22.42%
+Epoch 7/300: SGD Test Error: 25.57%
+Epoch 8/300: SGD Test Error: 21.24%
+Epoch 9/300: SGD Test Error: 18.75%
+Epoch 10/300: SGD Test Error: 16.96%
+Models saved at epoch 10
+Epoch 11/300: SGD Test Error: 19.19%
+Epoch 12/300: SGD Test Error: 24.71%
+Epoch 13/300: SGD Test Error: 18.63%
+Epoch 14/300: SGD Test Error: 15.80%
+Epoch 15/300: SGD Test Error: 23.23%
+Epoch 16/300: SGD Test Error: 18.06%
+Epoch 17/300: SGD Test Error: 22.05%
+Epoch 18/300: SGD Test Error: 16.99%
+Epoch 19/300: SGD Test Error: 16.90%
+Epoch 20/300: SGD Test Error: 20.10%
+Models saved at epoch 20
+Epoch 21/300: SGD Test Error: 21.88%
+Epoch 22/300: SGD Test Error: 18.36%
+Epoch 23/300: SGD Test Error: 21.48%
+Epoch 24/300: SGD Test Error: 15.11%
+Epoch 25/300: SGD Test Error: 26.23%
+Epoch 26/300: SGD Test Error: 14.18%
+Epoch 27/300: SGD Test Error: 12.86%
+Epoch 28/300: SGD Test Error: 13.52%
+Epoch 29/300: SGD Test Error: 15.29%
+Epoch 30/300: SGD Test Error: 15.53%
+Models saved at epoch 30
+Epoch 31/300: SGD Test Error: 13.60%
+Epoch 32/300: SGD Test Error: 16.07%
+Epoch 33/300: SGD Test Error: 12.66%
+Epoch 34/300: SGD Test Error: 14.11%
+Epoch 35/300: SGD Test Error: 15.03%
+Epoch 36/300: SGD Test Error: 18.76%
+Epoch 37/300: SGD Test Error: 16.74%
+Epoch 38/300: SGD Test Error: 12.97%
+Epoch 39/300: SGD Test Error: 14.13%
+Epoch 40/300: SGD Test Error: 12.77%
+Models saved at epoch 40
+Epoch 41/300: SGD Test Error: 13.15%
+Epoch 42/300: SGD Test Error: 13.97%
+Epoch 43/300: SGD Test Error: 14.41%
+Epoch 44/300: SGD Test Error: 20.75%
+Epoch 45/300: SGD Test Error: 14.85%
+Epoch 46/300: SGD Test Error: 13.07%
+Epoch 47/300: SGD Test Error: 13.71%
+Epoch 48/300: SGD Test Error: 16.10%
+Epoch 49/300: SGD Test Error: 14.37%
+Epoch 50/300: SGD Test Error: 15.69%
+Models saved at epoch 50
+Epoch 51/300: SGD Test Error: 22.33%
+Epoch 52/300: SGD Test Error: 15.80%
+Epoch 53/300: SGD Test Error: 14.01%
+Epoch 54/300: SGD Test Error: 13.43%
+Epoch 55/300: SGD Test Error: 12.66%
+Epoch 56/300: SGD Test Error: 14.61%
+Epoch 57/300: SGD Test Error: 13.69%
+Epoch 58/300: SGD Test Error: 14.23%
+Epoch 59/300: SGD Test Error: 19.96%
+Epoch 60/300: SGD Test Error: 14.58%
+Models saved at epoch 60
+Epoch 61/300: SGD Test Error: 12.19%
+Epoch 62/300: SGD Test Error: 15.38%
+Epoch 63/300: SGD Test Error: 19.35%
+Epoch 64/300: SGD Test Error: 13.22%
+Epoch 65/300: SGD Test Error: 10.70%
+Epoch 66/300: SGD Test Error: 18.29%
+Epoch 67/300: SGD Test Error: 17.60%
+Epoch 68/300: SGD Test Error: 12.72%
+Epoch 69/300: SGD Test Error: 15.47%
+Epoch 70/300: SGD Test Error: 12.89%
+Models saved at epoch 70
+Epoch 71/300: SGD Test Error: 13.50%
+Epoch 72/300: SGD Test Error: 20.98%
+Epoch 73/300: SGD Test Error: 16.97%
+Epoch 74/300: SGD Test Error: 14.69%
+Epoch 75/300: SGD Test Error: 12.61%
+Epoch 76/300: SGD Test Error: 12.88%
+Epoch 77/300: SGD Test Error: 16.35%
+Epoch 78/300: SGD Test Error: 12.48%
+Epoch 79/300: SGD Test Error: 12.27%
+Epoch 80/300: SGD Test Error: 12.24%
+Models saved at epoch 80
+Epoch 81/300: SGD Test Error: 11.15%
+Epoch 82/300: SGD Test Error: 11.50%
+Epoch 83/300: SGD Test Error: 11.73%
+Epoch 84/300: SGD Test Error: 13.61%
+Epoch 85/300: SGD Test Error: 16.51%
+Epoch 86/300: SGD Test Error: 10.60%
+Epoch 87/300: SGD Test Error: 12.87%
+Epoch 88/300: SGD Test Error: 11.43%
+Epoch 89/300: SGD Test Error: 14.65%
+Epoch 90/300: SGD Test Error: 15.14%
+Models saved at epoch 90
+Epoch 91/300: SGD Test Error: 12.79%
+Epoch 92/300: SGD Test Error: 12.93%
+Epoch 93/300: SGD Test Error: 13.92%
+Epoch 94/300: SGD Test Error: 15.59%
+Epoch 95/300: SGD Test Error: 11.21%
+Epoch 96/300: SGD Test Error: 13.63%
+Epoch 97/300: SGD Test Error: 10.14%
+Epoch 98/300: SGD Test Error: 10.84%
+Epoch 99/300: SGD Test Error: 13.17%
+Epoch 100/300: SGD Test Error: 14.53%
+Models saved at epoch 100
+Epoch 101/300: SGD Test Error: 11.78%
+Epoch 102/300: SGD Test Error: 14.25%
+Epoch 103/300: SGD Test Error: 11.61%
+Epoch 104/300: SGD Test Error: 10.92%
+Epoch 105/300: SGD Test Error: 11.85%
+Epoch 106/300: SGD Test Error: 14.25%
+Epoch 107/300: SGD Test Error: 10.90%
+Epoch 108/300: SGD Test Error: 12.15%
+Epoch 109/300: SGD Test Error: 14.02%
+Epoch 110/300: SGD Test Error: 11.99%
+Models saved at epoch 110
+Epoch 111/300: SGD Test Error: 14.70%
+Epoch 112/300: SGD Test Error: 14.50%
+Epoch 113/300: SGD Test Error: 10.83%
+Epoch 114/300: SGD Test Error: 15.37%
+Epoch 115/300: SGD Test Error: 11.85%
+Epoch 116/300: SGD Test Error: 13.84%
+Epoch 117/300: SGD Test Error: 9.62%
+Epoch 118/300: SGD Test Error: 11.14%
+Epoch 119/300: SGD Test Error: 12.20%
+Epoch 120/300: SGD Test Error: 12.92%
+Models saved at epoch 120
+Epoch 121/300: SGD Test Error: 12.14%
+Epoch 122/300: SGD Test Error: 10.12%
+Epoch 123/300: SGD Test Error: 12.58%
+Epoch 124/300: SGD Test Error: 10.50%
+Epoch 125/300: SGD Test Error: 13.62%
+Epoch 126/300: SGD Test Error: 11.18%
+Epoch 127/300: SGD Test Error: 10.21%
+Epoch 128/300: SGD Test Error: 12.64%
+Epoch 129/300: SGD Test Error: 14.87%
+Epoch 130/300: SGD Test Error: 12.75%
+Models saved at epoch 130
+Epoch 131/300: SGD Test Error: 11.72%
+Epoch 132/300: SGD Test Error: 10.20%
+Epoch 133/300: SGD Test Error: 9.39%
+Epoch 134/300: SGD Test Error: 13.18%
+Epoch 135/300: SGD Test Error: 10.34%
+Epoch 136/300: SGD Test Error: 10.83%
+Epoch 137/300: SGD Test Error: 8.72%
+Epoch 138/300: SGD Test Error: 13.95%
+Epoch 139/300: SGD Test Error: 10.61%
+Epoch 140/300: SGD Test Error: 12.90%
+Models saved at epoch 140
+Epoch 141/300: SGD Test Error: 13.14%
+Epoch 142/300: SGD Test Error: 13.19%
+Epoch 143/300: SGD Test Error: 10.05%
+Epoch 144/300: SGD Test Error: 11.98%
+Epoch 145/300: SGD Test Error: 10.16%
+Epoch 146/300: SGD Test Error: 8.49%
+Epoch 147/300: SGD Test Error: 9.68%
+Epoch 148/300: SGD Test Error: 10.74%
+Epoch 149/300: SGD Test Error: 11.37%
+Epoch 150/300: SGD Test Error: 11.65%
+Models saved at epoch 150
+Epoch 151/300: SGD Test Error: 13.86%
+Epoch 152/300: SGD Test Error: 10.87%
+Epoch 153/300: SGD Test Error: 11.28%
+Epoch 154/300: SGD Test Error: 14.61%
+Epoch 155/300: SGD Test Error: 10.24%
+Epoch 156/300: SGD Test Error: 10.22%
+Epoch 157/300: SGD Test Error: 10.22%
+Epoch 158/300: SGD Test Error: 9.56%
+Epoch 159/300: SGD Test Error: 9.53%
+Epoch 160/300: SGD Test Error: 10.40%
+Models saved at epoch 160
+Epoch 161/300: SGD Test Error: 9.57%
+Epoch 162/300: SGD Test Error: 10.51%
+Epoch 163/300: SGD Test Error: 10.46%
+Epoch 164/300: SGD Test Error: 11.28%
+Epoch 165/300: SGD Test Error: 9.96%
+Epoch 166/300: SGD Test Error: 8.74%
+Epoch 167/300: SGD Test Error: 9.55%
+Epoch 168/300: SGD Test Error: 8.65%
+Epoch 169/300: SGD Test Error: 10.37%
+Epoch 170/300: SGD Test Error: 9.00%
+Models saved at epoch 170
+Epoch 171/300: SGD Test Error: 11.36%
+Epoch 172/300: SGD Test Error: 10.68%
+Epoch 173/300: SGD Test Error: 7.10%
+Epoch 174/300: SGD Test Error: 10.30%
+Epoch 175/300: SGD Test Error: 9.45%
+Epoch 176/300: SGD Test Error: 9.90%
+Epoch 177/300: SGD Test Error: 8.09%
+Epoch 178/300: SGD Test Error: 9.14%
+Epoch 179/300: SGD Test Error: 8.14%
+Epoch 180/300: SGD Test Error: 10.18%
+Models saved at epoch 180
+Epoch 181/300: SGD Test Error: 10.48%
+Epoch 182/300: SGD Test Error: 8.32%
+Epoch 183/300: SGD Test Error: 8.51%
+Epoch 184/300: SGD Test Error: 9.69%
+Epoch 185/300: SGD Test Error: 11.85%
+Epoch 186/300: SGD Test Error: 8.46%
+Epoch 187/300: SGD Test Error: 8.30%
+Epoch 188/300: SGD Test Error: 9.79%
+Epoch 189/300: SGD Test Error: 8.62%
+Epoch 190/300: SGD Test Error: 9.30%
+Models saved at epoch 190
+Epoch 191/300: SGD Test Error: 7.75%
+Epoch 192/300: SGD Test Error: 9.38%
+Epoch 193/300: SGD Test Error: 8.32%
+Epoch 194/300: SGD Test Error: 8.54%
+Epoch 195/300: SGD Test Error: 7.42%
+Epoch 196/300: SGD Test Error: 9.92%
+Epoch 197/300: SGD Test Error: 7.18%
+Epoch 198/300: SGD Test Error: 8.02%
+Epoch 199/300: SGD Test Error: 7.61%
+Epoch 200/300: SGD Test Error: 7.22%
+Models saved at epoch 200
+Epoch 201/300: SGD Test Error: 7.69%
+Epoch 202/300: SGD Test Error: 7.32%
+Epoch 203/300: SGD Test Error: 7.79%
+Epoch 204/300: SGD Test Error: 7.56%
+Epoch 205/300: SGD Test Error: 8.35%
+Epoch 206/300: SGD Test Error: 7.94%
+Epoch 207/300: SGD Test Error: 6.56%
+Epoch 208/300: SGD Test Error: 7.92%
+Epoch 209/300: SGD Test Error: 7.52%
+Epoch 210/300: SGD Test Error: 7.66%
+Models saved at epoch 210
+Epoch 211/300: SGD Test Error: 7.01%
+Epoch 212/300: SGD Test Error: 7.83%
+Epoch 213/300: SGD Test Error: 7.23%
+Epoch 214/300: SGD Test Error: 7.76%
+Epoch 215/300: SGD Test Error: 7.55%
+Epoch 216/300: SGD Test Error: 7.42%
+Epoch 217/300: SGD Test Error: 8.38%
+Epoch 218/300: SGD Test Error: 8.62%
+Epoch 219/300: SGD Test Error: 8.44%
+Epoch 220/300: SGD Test Error: 6.69%
+Models saved at epoch 220
+Epoch 221/300: SGD Test Error: 6.80%
+Epoch 222/300: SGD Test Error: 6.06%
+Epoch 223/300: SGD Test Error: 7.02%
+Epoch 224/300: SGD Test Error: 6.29%
+Epoch 225/300: SGD Test Error: 7.16%
+Epoch 226/300: SGD Test Error: 6.57%
+Epoch 227/300: SGD Test Error: 5.62%
+Epoch 228/300: SGD Test Error: 6.20%
+Epoch 229/300: SGD Test Error: 6.10%
+Epoch 230/300: SGD Test Error: 6.12%
+Models saved at epoch 230
+Epoch 231/300: SGD Test Error: 6.98%
+Epoch 232/300: SGD Test Error: 6.80%
+Epoch 233/300: SGD Test Error: 6.34%
+Epoch 234/300: SGD Test Error: 7.38%
+Epoch 235/300: SGD Test Error: 6.83%
+Epoch 236/300: SGD Test Error: 6.35%
+Epoch 237/300: SGD Test Error: 5.82%
+Epoch 238/300: SGD Test Error: 5.71%
+Epoch 239/300: SGD Test Error: 5.29%
+Epoch 240/300: SGD Test Error: 5.19%
+Models saved at epoch 240
+Epoch 241/300: SGD Test Error: 5.96%
+Epoch 242/300: SGD Test Error: 5.50%
+Epoch 243/300: SGD Test Error: 5.30%
+Epoch 244/300: SGD Test Error: 5.27%
+Epoch 245/300: SGD Test Error: 5.10%
+Epoch 246/300: SGD Test Error: 4.84%
+Epoch 247/300: SGD Test Error: 4.64%
+Epoch 248/300: SGD Test Error: 5.61%
+Epoch 249/300: SGD Test Error: 4.94%
+Epoch 250/300: SGD Test Error: 4.55%
+Models saved at epoch 250
+Epoch 251/300: SGD Test Error: 4.93%
+Epoch 252/300: SGD Test Error: 5.05%
+Epoch 253/300: SGD Test Error: 4.81%
+Epoch 254/300: SGD Test Error: 4.59%
+Epoch 255/300: SGD Test Error: 4.49%
+Epoch 256/300: SGD Test Error: 4.41%
+Epoch 257/300: SGD Test Error: 4.53%
+Epoch 258/300: SGD Test Error: 4.33%
+Epoch 259/300: SGD Test Error: 4.13%
+Epoch 260/300: SGD Test Error: 4.22%
+Models saved at epoch 260
+Epoch 261/300: SGD Test Error: 4.26%
+Epoch 262/300: SGD Test Error: 4.21%
+Epoch 263/300: SGD Test Error: 4.08%
+Epoch 264/300: SGD Test Error: 4.10%
+Epoch 265/300: SGD Test Error: 3.90%
+Epoch 266/300: SGD Test Error: 3.90%
+Epoch 267/300: SGD Test Error: 3.95%
+Epoch 268/300: SGD Test Error: 3.88%
+Epoch 269/300: SGD Test Error: 3.86%
+Epoch 270/300: SGD Test Error: 3.77%
+Models saved at epoch 270
+Epoch 271/300: SGD Test Error: 3.72%
+Epoch 272/300: SGD Test Error: 3.81%
+Epoch 273/300: SGD Test Error: 3.79%
+Epoch 274/300: SGD Test Error: 3.82%
+Epoch 275/300: SGD Test Error: 3.78%
+Epoch 276/300: SGD Test Error: 3.84%
+Epoch 277/300: SGD Test Error: 3.87%
+Epoch 278/300: SGD Test Error: 3.88%
+Epoch 279/300: SGD Test Error: 3.86%
+Epoch 280/300: SGD Test Error: 3.81%
+Models saved at epoch 280
+Epoch 281/300: SGD Test Error: 3.92%
+Epoch 282/300: SGD Test Error: 3.89%
+Epoch 283/300: SGD Test Error: 3.85%
+Epoch 284/300: SGD Test Error: 3.85%
+Epoch 285/300: SGD Test Error: 3.84%
+Epoch 286/300: SGD Test Error: 3.82%
+Epoch 287/300: SGD Test Error: 3.84%
+Epoch 288/300: SGD Test Error: 3.89%
+Epoch 289/300: SGD Test Error: 3.80%
+Epoch 290/300: SGD Test Error: 3.84%
+Models saved at epoch 290
+Epoch 291/300: SGD Test Error: 3.83%
+Epoch 292/300: SGD Test Error: 3.77%
+Epoch 293/300: SGD Test Error: 3.83%
+Epoch 294/300: SGD Test Error: 3.78%
+Epoch 295/300: SGD Test Error: 3.84%
+Epoch 296/300: SGD Test Error: 3.86%
+Epoch 297/300: SGD Test Error: 3.85%
+Epoch 298/300: SGD Test Error: 3.78%
+Epoch 299/300: SGD Test Error: 3.77%
+Epoch 300/300: SGD Test Error: 3.93%
+Models saved at epoch 300

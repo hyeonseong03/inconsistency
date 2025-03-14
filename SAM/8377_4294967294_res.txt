@@ -1,0 +1,14 @@
+node1
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Epoch 1: SAM Test Error: 61.48%
+Epoch 2: SAM Test Error: 46.68%
+Epoch 3: SAM Test Error: 37.48%
+Epoch 4: SAM Test Error: 36.60%
+Epoch 5: SAM Test Error: 44.52%
+Epoch 6: SAM Test Error: 28.86%
+Epoch 7: SAM Test Error: 28.30%
+Epoch 8: SAM Test Error: 27.48%
+Epoch 9: SAM Test Error: 24.09%
+Epoch 10: SAM Test Error: 33.02%

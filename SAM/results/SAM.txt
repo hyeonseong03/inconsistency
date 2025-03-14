@@ -1,0 +1,333 @@
+node1
+Files already downloaded and verified
+Files already downloaded and verified
+Epoch 1/300: SAM Test Error: 60.09%
+Epoch 2/300: SAM Test Error: 38.36%
+Epoch 3/300: SAM Test Error: 32.16%
+Epoch 4/300: SAM Test Error: 25.16%
+Epoch 5/300: SAM Test Error: 21.45%
+Epoch 6/300: SAM Test Error: 23.09%
+Epoch 7/300: SAM Test Error: 21.59%
+Epoch 8/300: SAM Test Error: 20.17%
+Epoch 9/300: SAM Test Error: 17.36%
+Epoch 10/300: SAM Test Error: 17.41%
+Models saved at epoch 10
+Epoch 11/300: SAM Test Error: 20.74%
+Epoch 12/300: SAM Test Error: 14.65%
+Epoch 13/300: SAM Test Error: 19.69%
+Epoch 14/300: SAM Test Error: 16.22%
+Epoch 15/300: SAM Test Error: 15.07%
+Epoch 16/300: SAM Test Error: 13.78%
+Epoch 17/300: SAM Test Error: 17.38%
+Epoch 18/300: SAM Test Error: 15.32%
+Epoch 19/300: SAM Test Error: 12.11%
+Epoch 20/300: SAM Test Error: 16.02%
+Models saved at epoch 20
+Epoch 21/300: SAM Test Error: 14.35%
+Epoch 22/300: SAM Test Error: 15.86%
+Epoch 23/300: SAM Test Error: 12.96%
+Epoch 24/300: SAM Test Error: 13.87%
+Epoch 25/300: SAM Test Error: 15.08%
+Epoch 26/300: SAM Test Error: 12.98%
+Epoch 27/300: SAM Test Error: 13.71%
+Epoch 28/300: SAM Test Error: 15.53%
+Epoch 29/300: SAM Test Error: 13.54%
+Epoch 30/300: SAM Test Error: 13.17%
+Models saved at epoch 30
+Epoch 31/300: SAM Test Error: 14.93%
+Epoch 32/300: SAM Test Error: 16.42%
+Epoch 33/300: SAM Test Error: 13.88%
+Epoch 34/300: SAM Test Error: 15.95%
+Epoch 35/300: SAM Test Error: 12.50%
+Epoch 36/300: SAM Test Error: 15.64%
+Epoch 37/300: SAM Test Error: 12.76%
+Epoch 38/300: SAM Test Error: 11.89%
+Epoch 39/300: SAM Test Error: 13.36%
+Epoch 40/300: SAM Test Error: 11.92%
+Models saved at epoch 40
+Epoch 41/300: SAM Test Error: 12.16%
+Epoch 42/300: SAM Test Error: 12.66%
+Epoch 43/300: SAM Test Error: 12.58%
+Epoch 44/300: SAM Test Error: 14.01%
+Epoch 45/300: SAM Test Error: 13.22%
+Epoch 46/300: SAM Test Error: 13.06%
+Epoch 47/300: SAM Test Error: 13.29%
+Epoch 48/300: SAM Test Error: 11.83%
+Epoch 49/300: SAM Test Error: 12.29%
+Epoch 50/300: SAM Test Error: 15.42%
+Models saved at epoch 50
+Epoch 51/300: SAM Test Error: 15.74%
+Epoch 52/300: SAM Test Error: 12.22%
+Epoch 53/300: SAM Test Error: 14.64%
+Epoch 54/300: SAM Test Error: 12.00%
+Epoch 55/300: SAM Test Error: 11.42%
+Epoch 56/300: SAM Test Error: 12.49%
+Epoch 57/300: SAM Test Error: 10.83%
+Epoch 58/300: SAM Test Error: 11.64%
+Epoch 59/300: SAM Test Error: 13.26%
+Epoch 60/300: SAM Test Error: 13.10%
+Models saved at epoch 60
+Epoch 61/300: SAM Test Error: 13.83%
+Epoch 62/300: SAM Test Error: 10.84%
+Epoch 63/300: SAM Test Error: 11.65%
+Epoch 64/300: SAM Test Error: 14.63%
+Epoch 65/300: SAM Test Error: 13.48%
+Epoch 66/300: SAM Test Error: 12.74%
+Epoch 67/300: SAM Test Error: 10.94%
+Epoch 68/300: SAM Test Error: 10.87%
+Epoch 69/300: SAM Test Error: 11.45%
+Epoch 70/300: SAM Test Error: 11.25%
+Models saved at epoch 70
+Epoch 71/300: SAM Test Error: 12.08%
+Epoch 72/300: SAM Test Error: 12.77%
+Epoch 73/300: SAM Test Error: 12.73%
+Epoch 74/300: SAM Test Error: 10.49%
+Epoch 75/300: SAM Test Error: 14.00%
+Epoch 76/300: SAM Test Error: 11.01%
+Epoch 77/300: SAM Test Error: 11.94%
+Epoch 78/300: SAM Test Error: 11.58%
+Epoch 79/300: SAM Test Error: 12.58%
+Epoch 80/300: SAM Test Error: 13.31%
+Models saved at epoch 80
+Epoch 81/300: SAM Test Error: 10.09%
+Epoch 82/300: SAM Test Error: 12.11%
+Epoch 83/300: SAM Test Error: 10.90%
+Epoch 84/300: SAM Test Error: 11.96%
+Epoch 85/300: SAM Test Error: 13.30%
+Epoch 86/300: SAM Test Error: 12.62%
+Epoch 87/300: SAM Test Error: 10.24%
+Epoch 88/300: SAM Test Error: 13.83%
+Epoch 89/300: SAM Test Error: 12.14%
+Epoch 90/300: SAM Test Error: 14.47%
+Models saved at epoch 90
+Epoch 91/300: SAM Test Error: 11.04%
+Epoch 92/300: SAM Test Error: 10.26%
+Epoch 93/300: SAM Test Error: 9.68%
+Epoch 94/300: SAM Test Error: 12.55%
+Epoch 95/300: SAM Test Error: 12.64%
+Epoch 96/300: SAM Test Error: 11.57%
+Epoch 97/300: SAM Test Error: 10.66%
+Epoch 98/300: SAM Test Error: 13.68%
+Epoch 99/300: SAM Test Error: 10.79%
+Epoch 100/300: SAM Test Error: 12.32%
+Models saved at epoch 100
+Epoch 101/300: SAM Test Error: 10.48%
+Epoch 102/300: SAM Test Error: 12.50%
+Epoch 103/300: SAM Test Error: 11.64%
+Epoch 104/300: SAM Test Error: 10.97%
+Epoch 105/300: SAM Test Error: 12.93%
+Epoch 106/300: SAM Test Error: 11.18%
+Epoch 107/300: SAM Test Error: 11.87%
+Epoch 108/300: SAM Test Error: 10.77%
+Epoch 109/300: SAM Test Error: 11.64%
+Epoch 110/300: SAM Test Error: 12.13%
+Models saved at epoch 110
+Epoch 111/300: SAM Test Error: 12.57%
+Epoch 112/300: SAM Test Error: 8.85%
+Epoch 113/300: SAM Test Error: 14.10%
+Epoch 114/300: SAM Test Error: 10.92%
+Epoch 115/300: SAM Test Error: 9.31%
+Epoch 116/300: SAM Test Error: 11.25%
+Epoch 117/300: SAM Test Error: 8.74%
+Epoch 118/300: SAM Test Error: 11.33%
+Epoch 119/300: SAM Test Error: 10.89%
+Epoch 120/300: SAM Test Error: 10.27%
+Models saved at epoch 120
+Epoch 121/300: SAM Test Error: 9.61%
+Epoch 122/300: SAM Test Error: 10.45%
+Epoch 123/300: SAM Test Error: 9.87%
+Epoch 124/300: SAM Test Error: 9.42%
+Epoch 125/300: SAM Test Error: 10.04%
+Epoch 126/300: SAM Test Error: 9.54%
+Epoch 127/300: SAM Test Error: 8.92%
+Epoch 128/300: SAM Test Error: 9.38%
+Epoch 129/300: SAM Test Error: 10.18%
+Epoch 130/300: SAM Test Error: 8.62%
+Models saved at epoch 130
+Epoch 131/300: SAM Test Error: 9.01%
+Epoch 132/300: SAM Test Error: 9.73%
+Epoch 133/300: SAM Test Error: 9.73%
+Epoch 134/300: SAM Test Error: 11.50%
+Epoch 135/300: SAM Test Error: 10.97%
+Epoch 136/300: SAM Test Error: 9.61%
+Epoch 137/300: SAM Test Error: 10.05%
+Epoch 138/300: SAM Test Error: 8.03%
+Epoch 139/300: SAM Test Error: 8.69%
+Epoch 140/300: SAM Test Error: 9.42%
+Models saved at epoch 140
+Epoch 141/300: SAM Test Error: 9.68%
+Epoch 142/300: SAM Test Error: 11.76%
+Epoch 143/300: SAM Test Error: 8.94%
+Epoch 144/300: SAM Test Error: 7.91%
+Epoch 145/300: SAM Test Error: 8.86%
+Epoch 146/300: SAM Test Error: 10.93%
+Epoch 147/300: SAM Test Error: 10.38%
+Epoch 148/300: SAM Test Error: 9.22%
+Epoch 149/300: SAM Test Error: 8.32%
+Epoch 150/300: SAM Test Error: 8.70%
+Models saved at epoch 150
+Epoch 151/300: SAM Test Error: 9.38%
+Epoch 152/300: SAM Test Error: 8.44%
+Epoch 153/300: SAM Test Error: 8.87%
+Epoch 154/300: SAM Test Error: 9.27%
+Epoch 155/300: SAM Test Error: 7.81%
+Epoch 156/300: SAM Test Error: 8.27%
+Epoch 157/300: SAM Test Error: 8.44%
+Epoch 158/300: SAM Test Error: 9.31%
+Epoch 159/300: SAM Test Error: 8.40%
+Epoch 160/300: SAM Test Error: 8.27%
+Models saved at epoch 160
+Epoch 161/300: SAM Test Error: 8.74%
+Epoch 162/300: SAM Test Error: 9.62%
+Epoch 163/300: SAM Test Error: 8.65%
+Epoch 164/300: SAM Test Error: 8.64%
+Epoch 165/300: SAM Test Error: 8.56%
+Epoch 166/300: SAM Test Error: 8.37%
+Epoch 167/300: SAM Test Error: 8.37%
+Epoch 168/300: SAM Test Error: 9.57%
+Epoch 169/300: SAM Test Error: 7.88%
+Epoch 170/300: SAM Test Error: 8.25%
+Models saved at epoch 170
+Epoch 171/300: SAM Test Error: 9.92%
+Epoch 172/300: SAM Test Error: 10.66%
+Epoch 173/300: SAM Test Error: 8.78%
+Epoch 174/300: SAM Test Error: 7.85%
+Epoch 175/300: SAM Test Error: 8.21%
+Epoch 176/300: SAM Test Error: 7.70%
+Epoch 177/300: SAM Test Error: 8.44%
+Epoch 178/300: SAM Test Error: 8.32%
+Epoch 179/300: SAM Test Error: 9.16%
+Epoch 180/300: SAM Test Error: 7.66%
+Models saved at epoch 180
+Epoch 181/300: SAM Test Error: 8.00%
+Epoch 182/300: SAM Test Error: 8.50%
+Epoch 183/300: SAM Test Error: 7.96%
+Epoch 184/300: SAM Test Error: 9.43%
+Epoch 185/300: SAM Test Error: 7.64%
+Epoch 186/300: SAM Test Error: 7.84%
+Epoch 187/300: SAM Test Error: 7.91%
+Epoch 188/300: SAM Test Error: 7.79%
+Epoch 189/300: SAM Test Error: 8.82%
+Epoch 190/300: SAM Test Error: 7.65%
+Models saved at epoch 190
+Epoch 191/300: SAM Test Error: 6.88%
+Epoch 192/300: SAM Test Error: 7.34%
+Epoch 193/300: SAM Test Error: 7.91%
+Epoch 194/300: SAM Test Error: 6.53%
+Epoch 195/300: SAM Test Error: 7.27%
+Epoch 196/300: SAM Test Error: 6.92%
+Epoch 197/300: SAM Test Error: 8.18%
+Epoch 198/300: SAM Test Error: 7.04%
+Epoch 199/300: SAM Test Error: 7.01%
+Epoch 200/300: SAM Test Error: 8.15%
+Models saved at epoch 200
+Epoch 201/300: SAM Test Error: 7.40%
+Epoch 202/300: SAM Test Error: 6.50%
+Epoch 203/300: SAM Test Error: 6.50%
+Epoch 204/300: SAM Test Error: 6.88%
+Epoch 205/300: SAM Test Error: 6.64%
+Epoch 206/300: SAM Test Error: 7.57%
+Epoch 207/300: SAM Test Error: 7.09%
+Epoch 208/300: SAM Test Error: 7.29%
+Epoch 209/300: SAM Test Error: 6.65%
+Epoch 210/300: SAM Test Error: 6.93%
+Models saved at epoch 210
+Epoch 211/300: SAM Test Error: 6.47%
+Epoch 212/300: SAM Test Error: 7.49%
+Epoch 213/300: SAM Test Error: 5.87%
+Epoch 214/300: SAM Test Error: 7.13%
+Epoch 215/300: SAM Test Error: 5.92%
+Epoch 216/300: SAM Test Error: 6.35%
+Epoch 217/300: SAM Test Error: 7.34%
+Epoch 218/300: SAM Test Error: 7.23%
+Epoch 219/300: SAM Test Error: 6.29%
+Epoch 220/300: SAM Test Error: 6.73%
+Models saved at epoch 220
+Epoch 221/300: SAM Test Error: 5.98%
+Epoch 222/300: SAM Test Error: 6.06%
+Epoch 223/300: SAM Test Error: 6.15%
+Epoch 224/300: SAM Test Error: 6.90%
+Epoch 225/300: SAM Test Error: 5.88%
+Epoch 226/300: SAM Test Error: 5.88%
+Epoch 227/300: SAM Test Error: 6.99%
+Epoch 228/300: SAM Test Error: 6.09%
+Epoch 229/300: SAM Test Error: 5.47%
+Epoch 230/300: SAM Test Error: 5.25%
+Models saved at epoch 230
+Epoch 231/300: SAM Test Error: 5.90%
+Epoch 232/300: SAM Test Error: 6.35%
+Epoch 233/300: SAM Test Error: 4.96%
+Epoch 234/300: SAM Test Error: 5.70%
+Epoch 235/300: SAM Test Error: 6.19%
+Epoch 236/300: SAM Test Error: 5.46%
+Epoch 237/300: SAM Test Error: 5.27%
+Epoch 238/300: SAM Test Error: 5.52%
+Epoch 239/300: SAM Test Error: 4.87%
+Epoch 240/300: SAM Test Error: 4.65%
+Models saved at epoch 240
+Epoch 241/300: SAM Test Error: 4.92%
+Epoch 242/300: SAM Test Error: 5.34%
+Epoch 243/300: SAM Test Error: 4.83%
+Epoch 244/300: SAM Test Error: 4.72%
+Epoch 245/300: SAM Test Error: 4.77%
+Epoch 246/300: SAM Test Error: 4.89%
+Epoch 247/300: SAM Test Error: 4.60%
+Epoch 248/300: SAM Test Error: 4.39%
+Epoch 249/300: SAM Test Error: 4.24%
+Epoch 250/300: SAM Test Error: 4.15%
+Models saved at epoch 250
+Epoch 251/300: SAM Test Error: 4.00%
+Epoch 252/300: SAM Test Error: 3.94%
+Epoch 253/300: SAM Test Error: 3.92%
+Epoch 254/300: SAM Test Error: 3.85%
+Epoch 255/300: SAM Test Error: 3.82%
+Epoch 256/300: SAM Test Error: 3.83%
+Epoch 257/300: SAM Test Error: 3.91%
+Epoch 258/300: SAM Test Error: 3.72%
+Epoch 259/300: SAM Test Error: 3.74%
+Epoch 260/300: SAM Test Error: 3.75%
+Models saved at epoch 260
+Epoch 261/300: SAM Test Error: 3.82%
+Epoch 262/300: SAM Test Error: 3.65%
+Epoch 263/300: SAM Test Error: 3.60%
+Epoch 264/300: SAM Test Error: 3.69%
+Epoch 265/300: SAM Test Error: 3.58%
+Epoch 266/300: SAM Test Error: 3.68%
+Epoch 267/300: SAM Test Error: 3.64%
+Epoch 268/300: SAM Test Error: 3.61%
+Epoch 269/300: SAM Test Error: 3.62%
+Epoch 270/300: SAM Test Error: 3.54%
+Models saved at epoch 270
+Epoch 271/300: SAM Test Error: 3.63%
+Epoch 272/300: SAM Test Error: 3.56%
+Epoch 273/300: SAM Test Error: 3.62%
+Epoch 274/300: SAM Test Error: 3.50%
+Epoch 275/300: SAM Test Error: 3.54%
+Epoch 276/300: SAM Test Error: 3.63%
+Epoch 277/300: SAM Test Error: 3.55%
+Epoch 278/300: SAM Test Error: 3.49%
+Epoch 279/300: SAM Test Error: 3.55%
+Epoch 280/300: SAM Test Error: 3.46%
+Models saved at epoch 280
+Epoch 281/300: SAM Test Error: 3.47%
+Epoch 282/300: SAM Test Error: 3.53%
+Epoch 283/300: SAM Test Error: 3.55%
+Epoch 284/300: SAM Test Error: 3.55%
+Epoch 285/300: SAM Test Error: 3.56%
+Epoch 286/300: SAM Test Error: 3.48%
+Epoch 287/300: SAM Test Error: 3.49%
+Epoch 288/300: SAM Test Error: 3.59%
+Epoch 289/300: SAM Test Error: 3.72%
+Epoch 290/300: SAM Test Error: 3.48%
+Models saved at epoch 290
+Epoch 291/300: SAM Test Error: 3.57%
+Epoch 292/300: SAM Test Error: 3.57%
+Epoch 293/300: SAM Test Error: 3.57%
+Epoch 294/300: SAM Test Error: 3.53%
+Epoch 295/300: SAM Test Error: 3.58%
+Epoch 296/300: SAM Test Error: 3.51%
+Epoch 297/300: SAM Test Error: 3.49%
+Epoch 298/300: SAM Test Error: 3.59%
+Epoch 299/300: SAM Test Error: 3.59%
+Epoch 300/300: SAM Test Error: 3.55%
+Models saved at epoch 300
