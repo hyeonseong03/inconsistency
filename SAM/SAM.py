@@ -3,6 +3,7 @@ import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn as nn
 import matplotlib.pyplot as plt
+import os
 
 import sys; sys.path.append("..")
 from model import WideResNet
@@ -61,6 +62,10 @@ def evaluate(model):
             total += labels.size(0)
     return 100. * correct / total
 
+
+if not os.path.exists("./checkpoints"):
+    os.makedirs("./checkpoints")
+
 # 학습 루프
 for epoch in range(300):
     model.train()
@@ -76,17 +81,18 @@ for epoch in range(300):
         total_loss += loss.item()
 
     scheduler.step()
-    acc = evaluate(model)
-    error = 100 - acc
 
     loss_history.append(total_loss / len(train_loader))
-    error_history.append(error)
-
-    print(f"Epoch {epoch+1}: SAM Test Error: {error:.2f}%")
 
     if (epoch + 1) % 50 == 0:
-        torch.save(model.state_dict(), f"./checkpoints/sam_epoch{epoch+1}.pth")
-        print(f"Model saved at epoch {epoch+1}")
+      acc = evaluate(model)
+      error = 100 - acc
+      print(f"Epoch {epoch+1}: SAM Test Error: {error:.2f}%")
+      torch.save(model.state_dict(), f"./checkpoints/sam_epoch{epoch+1}.pth")
+      print(f"Model saved at epoch {epoch+1}")
+    else:
+      print(f"Epoch {epoch+1}: IAM Loss: {loss:.2f}%")
+
 
 # 결과 그래프 저장
 plt.figure(figsize=(12, 5))
@@ -96,13 +102,6 @@ plt.plot(range(1, 301), loss_history, label="SAM Loss", linestyle="-")
 plt.xlabel("Epochs")
 plt.ylabel("Loss")
 plt.title("Training Loss per Epoch")
-plt.legend()
-
-plt.subplot(1, 2, 2)
-plt.plot(range(1, 301), error_history, label="SAM Test Error", linestyle="-")
-plt.xlabel("Epochs")
-plt.ylabel("Test Error (%)")
-plt.title("Test Error per Epoch")
 plt.legend()
 
 plt.tight_layout()

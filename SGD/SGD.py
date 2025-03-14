@@ -36,6 +36,10 @@ def evaluate(model):
             total += labels.size(0)
     return 100. * correct / total
 
+if not os.path.exists("./checkpoints"):
+    os.makedirs("./checkpoints")
+
+    
 # 학습 루프
 for epoch in range(300):
     model.train()
