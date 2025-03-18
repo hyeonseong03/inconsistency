@@ -16,7 +16,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 train_loader, test_loader = get_cifar10_loaders()
 
 # Model Initialization
-model = WideResNet(depth=28, widen_factor=10, num_classes=10).to(device)
+model = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
 scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
@@ -24,7 +24,7 @@ scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
 loss_history = []
 error_history = []
 
-def SAMLoss(model, image, pred, label, criterion, rho = 0.05):
+def SAMLoss(model, image, pred, label, criterion, rho = 2.0):
     loss = criterion(pred, label)
 
     loss.backward(retain_graph=True)
@@ -91,7 +91,7 @@ for epoch in range(300):
       torch.save(model.state_dict(), f"./checkpoints/sam_epoch{epoch+1}.pth")
       print(f"Model saved at epoch {epoch+1}")
     else:
-      print(f"Epoch {epoch+1}: IAM Loss: {loss:.2f}%")
+      print(f"Epoch {epoch+1}: SAM Loss: {loss}%")
 
 
 # 결과 그래프 저장
