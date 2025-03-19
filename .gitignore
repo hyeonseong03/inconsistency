@@ -3,3 +3,4 @@ IAM/
 __pycache__/
 *.pth
 *.txt
+*.png
