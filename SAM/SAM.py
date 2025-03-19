@@ -19,12 +19,13 @@ train_loader, test_loader = get_cifar10_loaders()
 model = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
-scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
+# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
 
 loss_history = []
 error_history = []
 
-def SAMLoss(model, image, pred, label, criterion, rho = 2.0):
+def SAMLoss(model, image, pred, label, criterion, rho = 0.05):
     loss = criterion(pred, label)
 
     loss.backward(retain_graph=True)
@@ -81,18 +82,17 @@ for epoch in range(300):
         total_loss += loss.item()
 
     scheduler.step()
+    acc = evaluate(model)
+    error = 100 - acc
 
     loss_history.append(total_loss / len(train_loader))
+    error_history.append(error)
+
+    print(f"Epoch {epoch+1}: SAM Test Error: {error:.2f}%")
 
     if (epoch + 1) % 50 == 0:
-      acc = evaluate(model)
-      error = 100 - acc
-      print(f"Epoch {epoch+1}: SAM Test Error: {error:.2f}%")
-      torch.save(model.state_dict(), f"./checkpoints/sam_epoch{epoch+1}.pth")
-      print(f"Model saved at epoch {epoch+1}")
-    else:
-      print(f"Epoch {epoch+1}: SAM Loss: {loss}%")
-
+        torch.save(model.state_dict(), f"./checkpoints/sam_epoch{epoch+1}.pth")
+        print(f"Model saved at epoch {epoch+1}")
 
 # 결과 그래프 저장
 plt.figure(figsize=(12, 5))
@@ -102,6 +102,13 @@ plt.plot(range(1, 301), loss_history, label="SAM Loss", linestyle="-")
 plt.xlabel("Epochs")
 plt.ylabel("Loss")
 plt.title("Training Loss per Epoch")
+plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(range(1, 301), error_history, label="SAM Test Error", linestyle="-")
+plt.xlabel("Epochs")
+plt.ylabel("Test Error (%)")
+plt.title("Test Error per Epoch")
 plt.legend()
 
 plt.tight_layout()

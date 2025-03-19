@@ -3,6 +3,7 @@ import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn as nn
 import matplotlib.pyplot as plt
+import os
 
 import sys; sys.path.append("..")
 from model import WideResNet
@@ -15,10 +16,11 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 train_loader, test_loader = get_cifar10_loaders()
 
 # Model Initialization
-model = WideResNet(depth=28, widen_factor=10, num_classes=10).to(device)
+model = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
-scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
+# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
 
 loss_history = []
 error_history = []
@@ -39,7 +41,6 @@ def evaluate(model):
 if not os.path.exists("./checkpoints"):
     os.makedirs("./checkpoints")
 
-    
 # 학습 루프
 for epoch in range(300):
     model.train()
