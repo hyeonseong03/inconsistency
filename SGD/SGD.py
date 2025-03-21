@@ -3,6 +3,7 @@ import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn as nn
 import matplotlib.pyplot as plt
+import torch.nn.functional as F
 import os
 
 import sys; sys.path.append("..")
@@ -17,7 +18,9 @@ train_loader, test_loader = get_cifar10_loaders()
 
 # Model Initialization
 model = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
+model_prime = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
+criterion_kl = nn.KLDivLoss(reduction="batchmean")
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
 # scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
 scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
@@ -77,10 +80,10 @@ for epoch in range(300):
         optimizer.zero_grad()
         outputs = model(images)
         loss = criterion(outputs, labels)
+        inconsistency = inconsistencyLoss(model, images, outputs, labels, criterion)
         loss.backward()
         optimizer.step()
 
-        inconsistency = inconsistencyLoss(model, images, outputs, labels, criterion)
         total_inconsistency += inconsistency.item()
         total_loss += loss.item()
 
