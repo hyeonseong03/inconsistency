@@ -11,7 +11,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-gpu=6
 
-#SBATCH -t 24:00:00
+#SBATCH -t 30:00:00
 
 hostname
 eval "$(conda shell.bash hook)"
