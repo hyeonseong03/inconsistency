@@ -16,7 +16,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 train_loader, test_loader = get_cifar10_loaders()
 
 # Model Initialization
-model = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
+model = WideResNet(depth=28, width_factor=10, dropout=0.3, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
 # scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
@@ -25,7 +25,8 @@ scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160],
 loss_history = []
 error_history = []
 
-def SAMLoss(model, image, pred, label, criterion, rho = 0.05):
+def SAMLoss(model, image, label, criterion, rho = 0.05):
+    pred = model(image)
     loss = criterion(pred, label)
 
     loss.backward(retain_graph=True)
@@ -38,7 +39,7 @@ def SAMLoss(model, image, pred, label, criterion, rho = 0.05):
 
         for param, grad in zip(model.parameters(), grads):
           if param is not None:
-            param.add(rho * grad / torch.norm(grad + 1e-12))
+            param.data = param.data + rho * grad / (torch.norm(grad) + 1e-12)
 
     sam_pred = model(image)
     sam_loss = criterion(sam_pred, label)
@@ -46,7 +47,7 @@ def SAMLoss(model, image, pred, label, criterion, rho = 0.05):
     with torch.no_grad():
       for param, grad in zip(model.parameters(), grads):
         if param is not None:
-          param.sub(rho * grad / torch.norm(grad + 1e-12))
+          param.data = param.data - rho * grad / (torch.norm(grad) + 1e-12)
 
     return sam_loss
 
@@ -74,9 +75,8 @@ for epoch in range(300):
 
     for images, labels in train_loader:
         images, labels = images.to(device), labels.to(device)
+        loss = SAMLoss(model, images, labels, criterion)
         optimizer.zero_grad()
-        outputs = model(images)
-        loss = SAMLoss(model, images, outputs, labels, criterion)
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
