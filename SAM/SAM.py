@@ -19,8 +19,8 @@ train_loader, test_loader = get_cifar10_loaders()
 model = WideResNet(depth=28, width_factor=10, dropout=0.3, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
-# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
-scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
+scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
+# scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
 
 loss_history = []
 error_history = []
@@ -28,15 +28,11 @@ error_history = []
 def SAMLoss(model, image, label, criterion, rho = 0.05):
     pred = model(image)
     loss = criterion(pred, label)
-
     loss.backward(retain_graph=True)
 
-    with torch.no_grad():
-        grads = []
-        for param in model.parameters():
-          if param is not None:
-            grads.append(param.grad.clone())
+    grads = [param.grad.clone() for param in model.parameters() if param.requires_grad]
 
+    with torch.no_grad():
         for param, grad in zip(model.parameters(), grads):
           if param is not None:
             param.data = param.data + rho * grad / (torch.norm(grad) + 1e-12)
@@ -75,10 +71,12 @@ for epoch in range(300):
 
     for images, labels in train_loader:
         images, labels = images.to(device), labels.to(device)
-        loss = SAMLoss(model, images, labels, criterion)
+
         optimizer.zero_grad()
+        loss = SAMLoss(model, images, labels, criterion)
         loss.backward()
         optimizer.step()
+
         total_loss += loss.item()
 
     scheduler.step()
