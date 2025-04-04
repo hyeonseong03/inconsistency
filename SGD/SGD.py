@@ -5,10 +5,41 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 import torch.nn.functional as F
 import os
+import wandb
 
 import sys; sys.path.append("..")
 from model import WideResNet
 from data import get_cifar10_loaders
+from stepLR import StepLR
+from IAMloss import inconsistencyLoss
+
+epochs = 200
+lr = 0.1
+dropout = 0.3
+eval_mode = True if dropout > 0.0 else False
+rho = 0.1
+
+# Start a new wandb run to track this script.
+run = wandb.init(
+    # Set the wandb entity where your project will be logged (generally your team name).
+    entity="hyeonseong03-hanyang-university",
+    # Set the wandb project where this run will be logged.
+    project="IAM",
+    name="SGD_stepLR",
+    # Track hyperparameters and run metadata.
+    config={
+        "learning_rate": lr,
+        "architecture": "WRN-28-10",
+        "dataset": "CIFAR-10",
+        "epochs": epochs,
+        "optimizer": "SGD",
+        "dropout": dropout,
+        "augmentation": "cutout",
+        "scheduler": "stepLR",
+        "ascent": rho,
+        "eval": eval_mode,
+    },
+)
 
 # CUDA 설정
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -17,41 +48,18 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 train_loader, test_loader = get_cifar10_loaders()
 
 # Model Initialization
-model = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
-model_prime = WideResNet(depth=28, width_factor=10, dropout=0.0, in_channels=3, labels=10).to(device)
+model = WideResNet(depth=28, width_factor=10, dropout=dropout, in_channels=3, labels=10).to(device)
+model_prime = WideResNet(depth=28, width_factor=10, dropout=dropout, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 criterion_kl = nn.KLDivLoss(reduction="batchmean")
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
-# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
-scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
+# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
+# scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
+scheduler = StepLR(optimizer, lr, epochs)
 
 loss_history = []
 error_history = []
 inconsistency_history = []
-
-def inconsistencyLoss(model, image, pred, label, criterion, k = 1, beta = 1.0):
-    # Weight Initialization
-    model_prime.load_state_dict(model.state_dict())
-    with torch.no_grad():
-      for param in model_prime.parameters():
-        param.add(0.1 * torch.normal(0, 1, size=param.shape, device=device)) #0.1 수치가 애매함 -> normalization (gradient 없애려고 하는건데 0.1은 약간 클수도)
-
-    # Optimizar Initialization
-    optimizer = optim.SGD(model_prime.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
-
-    # Gradient Descent
-    model_prime.train()
-    for _ in range(k):
-        optimizer.zero_grad()
-        with torch.enable_grad():
-            loss_kl = -1 * criterion_kl(F.log_softmax(model_prime(image), dim=1),
-                                        F.softmax(pred, dim=1))
-        loss_kl.backward(retain_graph=True)
-        optimizer.step()
-
-    inconsistency_loss = beta * criterion_kl(F.log_softmax(model_prime(image), dim=1),
-                                                               F.softmax(pred, dim=1))
-    return inconsistency_loss
 
 def evaluate(model):
     model.eval()
@@ -70,7 +78,7 @@ if not os.path.exists("./checkpoints"):
     os.makedirs("./checkpoints")
 
 # 학습 루프
-for epoch in range(300):
+for epoch in range(epochs):
     model.train()
     total_loss = 0.0
     total_inconsistency = 0.0
@@ -79,15 +87,17 @@ for epoch in range(300):
         images, labels = images.to(device), labels.to(device)
         optimizer.zero_grad()
         outputs = model(images)
+
+        # loss
         loss = criterion(outputs, labels)
-        inconsistency = inconsistencyLoss(model, images, outputs, labels, criterion)
+        inconsistency = nconsistencyLoss(model, model_prime, images, outputs, labels, criterion, rho=rho, eval_mode = eval_mode)
         loss.backward()
         optimizer.step()
 
         total_inconsistency += inconsistency.item()
         total_loss += loss.item()
 
-    scheduler.step()
+    scheduler(epoch)
     acc = evaluate(model)
     error = 100 - acc
     avg_inconsistency = total_inconsistency / len(train_loader)
@@ -96,11 +106,13 @@ for epoch in range(300):
     inconsistency_history.append(avg_inconsistency)
     error_history.append(error)
 
-    print(f"Epoch {epoch+1}: SGD Test Error: {error:.2f}% Inconsistency: {avg_inconsistency}")
+    run.log({"Test Error": error, "Inconsistency": avg_inconsistency,})
 
     if (epoch + 1) % 50 == 0:
         torch.save(model.state_dict(), f"./checkpoints/sgd_epoch{epoch+1}.pth")
         print(f"Model saved at epoch {epoch+1}")
+
+run.finish()
 
 # 결과 그래프 저장
 plt.figure(figsize=(12, 5))

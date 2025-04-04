@@ -7,9 +7,12 @@ SGD/checkpoints/
 SAM/results/
 IAM/results/
 SGD/results/
+SAM/wandb/
+SGD/wandb/
 SAM/*.txt
 IAM/*.txt
 SGD/*.txt
 SAM/*.png
 IAM/*.png
 SGD/*.png
+IAMloss.py

@@ -4,7 +4,7 @@
 #SBATCH --partition=intern 
 #SBATCH --output=%A_%a_res.txt
 #SBATCH --error=%A_%a_err.txt
-#SBATCH --nodelist=node1
+#SBATCH --nodelist=lrning-mainserver
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem-per-gpu=16G
 

@@ -3,24 +3,24 @@ import torchvision
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
-# class Cutout:
-#     def __init__(self, size=16, p=0.5):
-#         self.size = size
-#         self.half_size = size // 2
-#         self.p = p
+class Cutout:
+    def __init__(self, size=16, p=0.5):
+        self.size = size
+        self.half_size = size // 2
+        self.p = p
 
-#     def __call__(self, image):
-#         if torch.rand(1).item() > self.p:
-#             return image
+    def __call__(self, image):
+        if torch.rand(1).item() > self.p:
+            return image
 
-#         c, h, w = image.shape
-#         left = torch.randint(-self.half_size, w - self.half_size, [1]).item()
-#         top = torch.randint(-self.half_size, h - self.half_size, [1]).item()
-#         right = min(w, left + self.size)
-#         bottom = min(h, top + self.size)
+        c, h, w = image.shape
+        left = torch.randint(-self.half_size, w - self.half_size, [1]).item()
+        top = torch.randint(-self.half_size, h - self.half_size, [1]).item()
+        right = min(w, left + self.size)
+        bottom = min(h, top + self.size)
 
-#         image[:, max(0, left): right, max(0, top): bottom] = 0
-#         return image
+        image[:, max(0, left): right, max(0, top): bottom] = 0
+        return image
 
 def _get_statistics():
     train_set = datasets.CIFAR10(root='../data', train=True, download=True, transform=transforms.ToTensor())
@@ -38,7 +38,7 @@ def get_cifar10_loaders(batch_size=128, num_workers=4):
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize(mean, std),
-        # Cutout()
+        Cutout()
     ])
 
     transform_test = transforms.Compose([

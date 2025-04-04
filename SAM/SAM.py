@@ -4,10 +4,40 @@ import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn as nn
 import matplotlib.pyplot as plt
 import os
+import wandb
 
 import sys; sys.path.append("..")
 from model import WideResNet
 from data import get_cifar10_loaders
+from stepLR import StepLR
+
+epochs = 200
+lr = 0.1
+dropout = 0.0
+eval_mode = True if dropout > 0.0 else False
+rho = 0.05
+
+# Start a new wandb run to track this script.
+run = wandb.init(
+    # Set the wandb entity where your project will be logged (generally your team name).
+    entity="hyeonseong03-hanyang-university",
+    # Set the wandb project where this run will be logged.
+    project="IAM",
+    name="SAM_w/odropout",
+    # Track hyperparameters and run metadata.
+    config={
+        "learning_rate": lr,
+        "architecture": "WRN-28-10",
+        "dataset": "CIFAR-10",
+        "epochs": epochs,
+        "optimizer": "SAM",
+        "dropout": dropout,
+        "augmentation": "cutout",
+        "scheduler": "multistep",
+        "ascent": rho,
+        "eval": eval_mode,
+    },
+)
 
 # CUDA 설정
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -16,16 +46,17 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 train_loader, test_loader = get_cifar10_loaders()
 
 # Model Initialization
-model = WideResNet(depth=28, width_factor=10, dropout=0.3, in_channels=3, labels=10).to(device)
+model = WideResNet(depth=28, width_factor=10, dropout=dropout, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
-scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
-# scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
+# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
+scheduler = StepLR(optimizer, lr, epochs)
 
 loss_history = []
 error_history = []
 
-def SAMLoss(model, image, label, criterion, rho = 0.05):
+def SAMLoss(model, image, label, criterion, rho = rho):
     pred = model(image)
     loss = criterion(pred, label)
     loss.backward(retain_graph=True)
@@ -65,7 +96,7 @@ if not os.path.exists("./checkpoints"):
     os.makedirs("./checkpoints")
 
 # 학습 루프
-for epoch in range(300):
+for epoch in range(epochs):
     model.train()
     total_loss = 0
 
@@ -79,18 +110,21 @@ for epoch in range(300):
 
         total_loss += loss.item()
 
-    scheduler.step()
+    # scheduler.step()
+    scheduler(epoch)
     acc = evaluate(model)
     error = 100 - acc
 
     loss_history.append(total_loss / len(train_loader))
     error_history.append(error)
 
-    print(f"Epoch {epoch+1}: SAM Test Error: {error:.2f}%")
+    run.log({"Test Error":error},)
 
     if (epoch + 1) % 50 == 0:
         torch.save(model.state_dict(), f"./checkpoints/sam_epoch{epoch+1}.pth")
         print(f"Model saved at epoch {epoch+1}")
+
+run.finish()
 
 # 결과 그래프 저장
 plt.figure(figsize=(12, 5))
