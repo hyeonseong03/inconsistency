@@ -14,6 +14,18 @@ from stepLR import StepLR
 from IAM import inconsistencyLoss
 from SAM import SAMLoss
 
+def evaluate(model):
+    model.eval()
+    correct = 0
+    total = 0
+    with torch.no_grad():
+        for images, labels in test_loader:
+            images, labels = images.to(device), labels.to(device)
+            outputs = model(images)
+            _, predicted = outputs.max(1)
+            correct += predicted.eq(labels).sum().item()
+            total += labels.size(0)
+    return 100. * correct / total
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -125,16 +137,3 @@ if __name__ == "__main__":
             print(f"Model saved at epoch {epoch+1}")
 
     run.finish()
-
-def evaluate(model):
-    model.eval()
-    correct = 0
-    total = 0
-    with torch.no_grad():
-        for images, labels in test_loader:
-            images, labels = images.to(device), labels.to(device)
-            outputs = model(images)
-            _, predicted = outputs.max(1)
-            correct += predicted.eq(labels).sum().item()
-            total += labels.size(0)
-    return 100. * correct / total
