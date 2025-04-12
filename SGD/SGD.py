@@ -15,9 +15,9 @@ from IAMloss import inconsistencyLoss
 
 epochs = 200
 lr = 0.1
-dropout = 0.3
+dropout = 0.0
 eval_mode = True if dropout > 0.0 else False
-rho = 0.1
+rho = 0.05
 
 # Start a new wandb run to track this script.
 run = wandb.init(
@@ -25,7 +25,7 @@ run = wandb.init(
     entity="hyeonseong03-hanyang-university",
     # Set the wandb project where this run will be logged.
     project="IAM",
-    name="SGD_stepLR",
+    name="SGD_basic",
     # Track hyperparameters and run metadata.
     config={
         "learning_rate": lr,
@@ -34,7 +34,7 @@ run = wandb.init(
         "epochs": epochs,
         "optimizer": "SGD",
         "dropout": dropout,
-        "augmentation": "cutout",
+        "augmentation": "basic",
         "scheduler": "stepLR",
         "ascent": rho,
         "eval": eval_mode,
@@ -90,23 +90,24 @@ for epoch in range(epochs):
 
         # loss
         loss = criterion(outputs, labels)
-        inconsistency = nconsistencyLoss(model, model_prime, images, outputs, labels, criterion, rho=rho, eval_mode = eval_mode)
+        # inconsistency = inconsistencyLoss(model, model_prime, images, outputs, labels, criterion, rho=rho, eval_mode = eval_mode)
         loss.backward()
         optimizer.step()
 
-        total_inconsistency += inconsistency.item()
+        # total_inconsistency += inconsistency.item()
         total_loss += loss.item()
 
     scheduler(epoch)
     acc = evaluate(model)
     error = 100 - acc
-    avg_inconsistency = total_inconsistency / len(train_loader)
+    # avg_inconsistency = total_inconsistency / len(train_loader)
 
     loss_history.append(total_loss / len(train_loader))
-    inconsistency_history.append(avg_inconsistency)
+    # inconsistency_history.append(avg_inconsistency)
     error_history.append(error)
 
-    run.log({"Test Error": error, "Inconsistency": avg_inconsistency,})
+    # run.log({"Test Error": error, "Inconsistency": avg_inconsistency,})
+    run.log({"Test Error": error,})
 
     if (epoch + 1) % 50 == 0:
         torch.save(model.state_dict(), f"./checkpoints/sgd_epoch{epoch+1}.pth")
@@ -115,29 +116,29 @@ for epoch in range(epochs):
 run.finish()
 
 # 결과 그래프 저장
-plt.figure(figsize=(12, 5))
+# plt.figure(figsize=(12, 5))
 
-plt.subplot(1, 3, 1)
-plt.plot(range(1, 301), loss_history, label="SGD Loss", linestyle="--")
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.title("Training Loss per Epoch")
-plt.legend()
+# plt.subplot(1, 3, 1)
+# plt.plot(range(1, 301), loss_history, label="SGD Loss", linestyle="--")
+# plt.xlabel("Epochs")
+# plt.ylabel("Loss")
+# plt.title("Training Loss per Epoch")
+# plt.legend()
 
-plt.subplot(1, 3, 2)
-plt.plot(range(1, 301), error_history, label="SGD Test Error", linestyle="--")
-plt.xlabel("Epochs")
-plt.ylabel("Test Error (%)")
-plt.title("Test Error per Epoch")
-plt.legend()
+# plt.subplot(1, 3, 2)
+# plt.plot(range(1, 301), error_history, label="SGD Test Error", linestyle="--")
+# plt.xlabel("Epochs")
+# plt.ylabel("Test Error (%)")
+# plt.title("Test Error per Epoch")
+# plt.legend()
 
-# Inconsistency  Graph
-plt.subplot(1, 3, 3)
-plt.plot(range(1, epochs + 1), inconsistency_history, label="Inconsistency", linestyle="-", color="green")
-plt.xlabel("Epochs")
-plt.ylabel("Inconsistency")
-plt.title("Inconsistency per Epoch")
-plt.legend()
+# # Inconsistency  Graph
+# plt.subplot(1, 3, 3)
+# plt.plot(range(1, epochs + 1), inconsistency_history, label="Inconsistency", linestyle="-", color="green")
+# plt.xlabel("Epochs")
+# plt.ylabel("Inconsistency")
+# plt.title("Inconsistency per Epoch")
+# plt.legend()
 
-plt.tight_layout()
-plt.savefig("training_results_sgd.png", dpi=300)
+# plt.tight_layout()
+# plt.savefig("training_results_sgd.png", dpi=300)

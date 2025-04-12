@@ -23,7 +23,7 @@ run = wandb.init(
     entity="hyeonseong03-hanyang-university",
     # Set the wandb project where this run will be logged.
     project="IAM",
-    name="SAM_w/odropout",
+    name="SAM_basic",
     # Track hyperparameters and run metadata.
     config={
         "learning_rate": lr,
@@ -33,7 +33,7 @@ run = wandb.init(
         "optimizer": "SAM",
         "dropout": dropout,
         "augmentation": "cutout",
-        "scheduler": "multistep",
+        "scheduler": "stepLR",
         "ascent": rho,
         "eval": eval_mode,
     },
@@ -49,8 +49,8 @@ train_loader, test_loader = get_cifar10_loaders()
 model = WideResNet(depth=28, width_factor=10, dropout=dropout, in_channels=3, labels=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
-# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
-scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
+# scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
+# scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
 scheduler = StepLR(optimizer, lr, epochs)
 
 loss_history = []
@@ -62,11 +62,13 @@ def SAMLoss(model, image, label, criterion, rho = rho):
     loss.backward(retain_graph=True)
 
     grads = [param.grad.clone() for param in model.parameters() if param.requires_grad]
+    wgrads = [torch.norm(param.grad, p=2) for param in model.parameters() if param.requires_grad]
+    norm = torch.norm(torch.stack(wgrads), p=2) + 1e-12
 
     with torch.no_grad():
         for param, grad in zip(model.parameters(), grads):
           if param is not None:
-            param.data = param.data + rho * grad / (torch.norm(grad) + 1e-12)
+            param.data = param.data + rho * grad / norm
 
     sam_pred = model(image)
     sam_loss = criterion(sam_pred, label)
@@ -74,7 +76,7 @@ def SAMLoss(model, image, label, criterion, rho = rho):
     with torch.no_grad():
       for param, grad in zip(model.parameters(), grads):
         if param is not None:
-          param.data = param.data - rho * grad / (torch.norm(grad) + 1e-12)
+          param.data = param.data - rho * grad / norm
 
     return sam_loss
 

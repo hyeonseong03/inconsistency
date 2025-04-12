@@ -38,7 +38,7 @@ def get_cifar10_loaders(batch_size=128, num_workers=4):
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize(mean, std),
-        Cutout()
+        # Cutout()
     ])
 
     transform_test = transforms.Compose([
