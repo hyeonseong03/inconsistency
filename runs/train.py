@@ -133,7 +133,7 @@ if __name__ == "__main__":
 
         # 모델 저장
         if (epoch + 1) % 50 == 0:
-            torch.save(model.state_dict(), f"./checkpoints/"+args.optimizer+"_epoch{epoch+1}.pth")
+            torch.save(model.state_dict(), "./checkpoints/"+args.optimizer+f"_epoch{epoch+1}.pth")
             print(f"Model saved at epoch {epoch+1}")
 
     run.finish()

@@ -3,8 +3,8 @@ IAM/
 __pycache__/
 */checkpoints/
 */results/
-IAM.py
 */checkpoints/
 */*.txt
 */*.png
 */wandb/
+IAM.py
