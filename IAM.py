@@ -17,15 +17,15 @@ def inconsistencyLoss(model, model_prime, image, pred, label, criterion, k = 1, 
     noise_dict = {}
     with torch.no_grad():
       for name, param in model_prime.named_parameters():
-        # noise = 0.001 * torch.normal(0, 1, size=param.data.shape, device=device)
+        # noise = 0.001 * torch.normal(0, 1, size=param.data.shape, device=device) #0.1 수치가 애매함 -> normalization (gradient 없애려고 하는건데 0.1은 약간 클수도)
         noise = torch.normal(0, 1, size=param.data.shape, device=device) / math.sqrt(sum(p.numel() for p in model.parameters() if p.requires_grad))
-        param.data = param.data + noise #0.1 수치가 애매함 -> normalization (gradient 없애려고 하는건데 0.1은 약간 클수도)
+        param.data = param.data + noise
         noise_dict[name] = noise
 
-    # optimizer_prime = optim.SGD(model_prime.parameters(), lr=0.01, momentum=0.9, weight_decay=5e-4)
+    # optimizer_prime = optim.SGD(model_prime.parameters(), lr=rho, momentum=0.9, weight_decay=5e-4)
 
     if eval_mode:
-        # Without BatchNorm
+        # Without dropout
         model.eval()
         model_prime.eval()
         pred = model(image)
@@ -49,24 +49,24 @@ def inconsistencyLoss(model, model_prime, image, pred, label, criterion, k = 1, 
 
         
     # Gradient ascent
-    for _ in range(k):
-        # optimizer_prime.zero_grad()
-        with torch.enable_grad():
-            loss_kl = 0.0
-            if eval_mode:
-                loss_kl = -1 * criterion_kl(F.log_softmax(model_prime(image), dim=1), pred_soft)
-            else:
-                # torch.manual_seed(seed)
-                loss_kl = -1 * criterion_kl(F.log_softmax(model_prime(image), dim=1), F.softmax(pred, dim=1))
-        loss_kl.backward(retain_graph=True)
-        # optimizer_prime.step()
+    # for _ in range(k):
+    #     optimizer_prime.zero_grad()
+    #     with torch.enable_grad():
+    #         loss_kl = 0.0
+    #         if eval_mode:
+    #             loss_kl = -1 * criterion_kl(F.log_softmax(model_prime(image), dim=1), pred_soft)
+    #         else:
+    #             # torch.manual_seed(seed)
+    #             loss_kl = -1 * criterion_kl(F.log_softmax(model_prime(image), dim=1), F.softmax(pred, dim=1))
+    #     loss_kl.backward(retain_graph=True)
+    #     optimizer_prime.step()
 
-        # SAM-like gradient ascent
-        grads = [param.grad.clone() for param in model_prime.parameters() if param.requires_grad]
-        wgrads = [torch.norm(param.grad, p=2) for param in model_prime.parameters() if param.requires_grad]
-        norm = torch.norm(torch.stack(wgrads), p=2) + 1e-12
+        # # SAM-like gradient ascent
+        # grads = [param.grad.clone() for param in model_prime.parameters() if param.requires_grad]
+        # wgrads = [torch.norm(param.grad, p=2) for param in model_prime.parameters() if param.requires_grad]
+        # norm = torch.norm(torch.stack(wgrads), p=2) + 1e-12
         
-        # ASAM-like
+        # # ASAM-like
         # scaled_grads = [grad * (torch.abs(param) + 1e-3) for param, grad in zip(model_prime.parameters(), grads)]
         # norm = torch.norm(torch.stack([torch.norm(g, p=2) for g in scaled_grads]), p=2) + 1e-12
 
@@ -80,11 +80,11 @@ def inconsistencyLoss(model, model_prime, image, pred, label, criterion, k = 1, 
                     # param.data = param.data - noise_dict[name] + rho * grad / norm
 
                     #SAM-like ascent
-                    param.data = param.data - noise_dict[name] + rho * grad / norm
+                    # param.data = param.data - noise_dict[name] + rho * grad / norm
 
                     # Random ascent
-                    # vec = torch.randn_like(param)
-                    # param.data = param.data - noise_dict[name] + rho * vec / (torch.norm(vec) + 1e-12)
+                    vec = torch.randn_like(param)
+                    param.data = param.data - noise_dict[name] + rho * vec / (torch.norm(vec) + 1e-12)
 
     if eval_mode:  # model도 eval() 켜기
         return beta * criterion_kl(F.log_softmax(model_prime(image), dim=1), pred_soft)

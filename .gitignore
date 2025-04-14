@@ -3,7 +3,7 @@ IAM/
 __pycache__/
 */checkpoints/
 */results/
-IAMloss.py
+IAM.py
 */checkpoints/
 */*.txt
 */*.png

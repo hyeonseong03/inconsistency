@@ -1,9 +1,9 @@
-import argparse
 import torch
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn as nn
 import matplotlib.pyplot as plt
+import argparse
 import os
 import wandb
 
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--optimizer", default="IAM", type=str)
     parser.add_argument("--dropout", default=0.0, type=float)
-    parser.add_argument("--rho", default=0.05, type=int)
+    parser.add_argument("--rho", default=0.05, type=float)
     parser.add_argument("--epochs", default=200, type=int)
     parser.add_argument("--lr", default=0.1, type=float)
     parser.add_argument("--beta", default=1.0, type=float)
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         entity="hyeonseong03-hanyang-university",
         # Set the wandb project where this run will be logged.
         project="IAM",
-        name=args.optimizer+"_basic",
+        name=args.optimizer+"_random",
         # Track hyperparameters and run metadata.
         config={
             "learning_rate": args.lr,
