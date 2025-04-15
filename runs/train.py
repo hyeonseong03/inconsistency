@@ -28,6 +28,8 @@ def evaluate(model):
     return 100. * correct / total
 
 if __name__ == "__main__":
+    os.environ["TMPDIR"] = "/home/intern/tmp"
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--optimizer", default="IAM", type=str)
     parser.add_argument("--dropout", default=0.0, type=float)
@@ -49,7 +51,7 @@ if __name__ == "__main__":
         entity="hyeonseong03-hanyang-university",
         # Set the wandb project where this run will be logged.
         project="IAM",
-        name=args.optimizer+"_random",
+        name=args.optimizer+"_v2_rho=0.05",
         # Track hyperparameters and run metadata.
         config={
             "learning_rate": args.lr,
@@ -100,15 +102,15 @@ if __name__ == "__main__":
             if args.optimizer == "IAM":
                 inconsistency = inconsistencyLoss(model, model_prime, images, outputs, labels, criterion, rho=args.rho, eval_mode = eval_mode)
                 loss = criterion(outputs, labels) + inconsistency
-
+                loss.backward()
+                optimizer.step()
             elif args.optimizer == "SAM":
-                loss = SAMLoss(model, images, labels, criterion, args.rho)
-
+                loss = SAMLoss(model, images, labels, criterion, optimizer, args.rho)
             elif args.optimizer == "SGD":
                 loss = criterion(outputs, labels)
-
-            loss.backward()
-            optimizer.step()
+                loss.backward()
+                optimizer.step()
+            
 
             total_loss += loss.item()
 

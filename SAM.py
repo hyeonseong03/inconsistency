@@ -1,6 +1,6 @@
 import torch
 
-def SAMLoss(model, image, label, criterion, rho):
+def SAMLoss(model, image, label, criterion, optimizer, rho):
     pred = model(image)
     loss = criterion(pred, label)
     loss.backward(retain_graph=True)
@@ -12,7 +12,7 @@ def SAMLoss(model, image, label, criterion, rho):
     with torch.no_grad():
         for param, grad in zip(model.parameters(), grads):
           if param is not None:
-            param.data = param.data + rho * grad / norm
+            param.add(rho * grad / norm)
 
     sam_pred = model(image)
     sam_loss = criterion(sam_pred, label)
@@ -20,6 +20,8 @@ def SAMLoss(model, image, label, criterion, rho):
     with torch.no_grad():
       for param, grad in zip(model.parameters(), grads):
         if param is not None:
-          param.data = param.data - rho * grad / norm
+          param.sub(rho * grad / norm)
 
+    optimizer.step()
+    
     return sam_loss
