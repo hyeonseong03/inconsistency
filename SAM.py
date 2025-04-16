@@ -1,27 +1,36 @@
 import torch
 
 def SAMLoss(model, image, label, criterion, optimizer, rho):
+    # 1st forward-backward
+    model.eval()
     pred = model(image)
     loss = criterion(pred, label)
-    loss.backward(retain_graph=True)
+    loss.backward()
 
     grads = [param.grad.clone() for param in model.parameters() if param.requires_grad]
-    wgrads = [torch.norm(param.grad, p=2) for param in model.parameters() if param.requires_grad]
-    norm = torch.norm(torch.stack(wgrads), p=2) + 1e-12
+    grad_norm = torch.norm(torch.stack([g.norm() for g in grads]))
 
+    # backup
+    backup = [param.data.clone() for param in model.parameters() if param.requires_grad]
+
+    # perturb
     with torch.no_grad():
         for param, grad in zip(model.parameters(), grads):
-          if param is not None:
-            param.add(rho * grad / norm)
+            param.add_(rho * grad / (grad_norm + 1e-12))
 
-    sam_pred = model(image)
-    sam_loss = criterion(sam_pred, label)
+    # 2nd forward-backward
+    model.train()
+    model.zero_grad()
+    pred_perturbed = model(image)
+    loss_perturbed = criterion(pred_perturbed, label)
+    loss_perturbed.backward()
 
+    # restore
     with torch.no_grad():
-      for param, grad in zip(model.parameters(), grads):
-        if param is not None:
-          param.sub(rho * grad / norm)
+        for param, backup_param in zip(model.parameters(), backup):
+            param.data.copy_(backup_param)
 
     optimizer.step()
-    
-    return sam_loss
+    optimizer.zero_grad()
+
+    return loss_perturbed

@@ -90,8 +90,9 @@ class WideResNet(nn.Module):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
             elif isinstance(m, nn.Linear):
-                m.weight.data.zero_()
-                m.bias.data.zero_()
+                nn.init.kaiming_normal_(m.weight.data, mode="fan_in", nonlinearity="relu")
+                if m.bias is not None:
+                    m.bias.data.zero_()
 
     def forward(self, x):
         return self.f(x)

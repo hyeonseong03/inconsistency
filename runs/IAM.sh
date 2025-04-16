@@ -16,6 +16,6 @@
 hostname
 eval "$(conda shell.bash hook)"
 conda activate hyeonseongkim
-python train.py --optimizer IAM --rho 0.05
+python train.py --optimizer IAM
 
 exit 0

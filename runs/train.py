@@ -40,7 +40,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # eval_mode 설정 (IAM용)
-    eval_mode = False if args.dropout == 0.0 else True
+    eval_mode = True
 
     # CUDA 설정
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         entity="hyeonseong03-hanyang-university",
         # Set the wandb project where this run will be logged.
         project="IAM",
-        name=args.optimizer+"_v2_rho=0.05",
+        name=args.optimizer+"_kaiming_multistep",
         # Track hyperparameters and run metadata.
         config={
             "learning_rate": args.lr,
@@ -61,7 +61,7 @@ if __name__ == "__main__":
             "optimizer": args.optimizer,
             "dropout": args.dropout,
             "augmentation": "basic",
-            "scheduler": "stepLR",
+            "scheduler": "multistep",
             "beta": args.beta,
             "ascent": args.rho,
             "eval": eval_mode,
@@ -75,7 +75,8 @@ if __name__ == "__main__":
     model_prime = WideResNet(depth=28, width_factor=10, dropout=args.dropout, in_channels=3, labels=10).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
-    scheduler = StepLR(optimizer, args.lr, args.epochs)
+    # scheduler = StepLR(optimizer, args.lr, args.epochs)
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
 
     loss_history = []
     error_history = []
@@ -86,36 +87,38 @@ if __name__ == "__main__":
 
     #Training Loop
     for epoch in range(args.epochs):
-        model.train()
         
         total_loss = 0.0
         total_inconsistency = 0.0
         
         for images, labels in train_loader:
             images, labels = images.to(device), labels.to(device)
-            optimizer.zero_grad()
-            outputs = model(images)
 
             loss = 0.0
             inconsistency = 0.0
 
             if args.optimizer == "IAM":
-                inconsistency = inconsistencyLoss(model, model_prime, images, outputs, labels, criterion, rho=args.rho, eval_mode = eval_mode)
+                inconsistency = inconsistencyLoss(model, model_prime, images, labels, criterion, rho=args.rho, eval_mode = eval_mode)
+                model.train()
+                outputs = model(images)
                 loss = criterion(outputs, labels) + inconsistency
+                optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
             elif args.optimizer == "SAM":
                 loss = SAMLoss(model, images, labels, criterion, optimizer, args.rho)
             elif args.optimizer == "SGD":
+                model.train()
+                outputs = model(images)
                 loss = criterion(outputs, labels)
+                optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-            
 
             total_loss += loss.item()
 
-        # scheduler.step()
-        scheduler(epoch)
+        scheduler.step()
+        # scheduler(epoch)
 
         # Average Loss
         avg_loss = total_loss / len(train_loader)
