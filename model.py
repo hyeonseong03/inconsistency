@@ -14,10 +14,10 @@ class BasicUnit(nn.Module):
         super(BasicUnit, self).__init__()
         self.block = nn.Sequential(OrderedDict([
             ("0_normalization", nn.BatchNorm2d(channels)),
-            ("1_activation", nn.ReLU(inplace=False)),
+            ("1_activation", nn.ReLU(inplace=True)),
             ("2_convolution", nn.Conv2d(channels, channels, (3, 3), stride=1, padding=1, bias=False)),
             ("3_normalization", nn.BatchNorm2d(channels)),
-            ("4_activation", nn.ReLU(inplace=False)),
+            ("4_activation", nn.ReLU(inplace=True)),
             ("5_dropout", nn.Dropout(dropout, inplace=False)),
             ("6_convolution", nn.Conv2d(channels, channels, (3, 3), stride=1, padding=1, bias=False)),
         ]))
@@ -31,12 +31,12 @@ class DownsampleUnit(nn.Module):
         super(DownsampleUnit, self).__init__()
         self.norm_act = nn.Sequential(OrderedDict([
             ("0_normalization", nn.BatchNorm2d(in_channels)),
-            ("1_activation", nn.ReLU(inplace=False)),
+            ("1_activation", nn.ReLU(inplace=True)),
         ]))
         self.block = nn.Sequential(OrderedDict([
             ("0_convolution", nn.Conv2d(in_channels, out_channels, (3, 3), stride=stride, padding=1, bias=False)),
             ("1_normalization", nn.BatchNorm2d(out_channels)),
-            ("2_activation", nn.ReLU(inplace=False)),
+            ("2_activation", nn.ReLU(inplace=True)),
             ("3_dropout", nn.Dropout(dropout, inplace=False)),
             ("4_convolution", nn.Conv2d(out_channels, out_channels, (3, 3), stride=1, padding=1, bias=False)),
         ]))
@@ -72,7 +72,7 @@ class WideResNet(nn.Module):
             ("2_block", Block(self.filters[1], self.filters[2], 2, self.block_depth, dropout)),
             ("3_block", Block(self.filters[2], self.filters[3], 2, self.block_depth, dropout)),
             ("4_normalization", nn.BatchNorm2d(self.filters[3])),
-            ("5_activation", nn.ReLU(inplace=False)),
+            ("5_activation", nn.ReLU(inplace=True)),
             ("6_pooling", nn.AvgPool2d(kernel_size=8)),
             ("7_flattening", nn.Flatten()),
             ("8_classification", nn.Linear(in_features=self.filters[3], out_features=labels)),

@@ -77,6 +77,7 @@ if __name__ == "__main__":
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
     # scheduler = StepLR(optimizer, args.lr, args.epochs)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
+    # scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.epochs)
 
     loss_history = []
     error_history = []

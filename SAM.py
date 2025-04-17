@@ -2,12 +2,12 @@ import torch
 
 def SAMLoss(model, image, label, criterion, optimizer, rho):
     # 1st forward-backward
-    model.eval()
+    # model.eval()
     pred = model(image)
     loss = criterion(pred, label)
     loss.backward()
 
-    grads = [param.grad.clone() for param in model.parameters() if param.requires_grad]
+    grads = [param.grad.detach().clone() for param in model.parameters() if param.requires_grad]
     grad_norm = torch.norm(torch.stack([g.norm() for g in grads]))
 
     # backup
@@ -20,7 +20,7 @@ def SAMLoss(model, image, label, criterion, optimizer, rho):
 
     # 2nd forward-backward
     model.train()
-    model.zero_grad()
+    optimizer.zero_grad()
     pred_perturbed = model(image)
     loss_perturbed = criterion(pred_perturbed, label)
     loss_perturbed.backward()
