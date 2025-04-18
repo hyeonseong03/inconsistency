@@ -33,7 +33,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--optimizer", default="IAM", type=str)
     parser.add_argument("--dropout", default=0.0, type=float)
-    parser.add_argument("--rho", default=0.05, type=float)
+    parser.add_argument("--ascent", default=0.05, type=float)
     parser.add_argument("--epochs", default=200, type=int)
     parser.add_argument("--lr", default=0.1, type=float)
     parser.add_argument("--beta", default=1.0, type=float)
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         entity="hyeonseong03-hanyang-university",
         # Set the wandb project where this run will be logged.
         project="IAM",
-        name=args.optimizer+"_kaiming_multistep",
+        name=args.optimizer+"_grad_clip",
         # Track hyperparameters and run metadata.
         config={
             "learning_rate": args.lr,
@@ -63,7 +63,7 @@ if __name__ == "__main__":
             "augmentation": "basic",
             "scheduler": "multistep",
             "beta": args.beta,
-            "ascent": args.rho,
+            "ascent": args.ascent,
             "eval": eval_mode,
         },
     )
@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
     model = WideResNet(depth=28, width_factor=10, dropout=args.dropout, in_channels=3, labels=10).to(device)
     model_prime = WideResNet(depth=28, width_factor=10, dropout=args.dropout, in_channels=3, labels=10).to(device)
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
     # scheduler = StepLR(optimizer, args.lr, args.epochs)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=0.2)
@@ -99,15 +99,17 @@ if __name__ == "__main__":
             inconsistency = 0.0
 
             if args.optimizer == "IAM":
-                inconsistency = inconsistencyLoss(model, model_prime, images, labels, criterion, rho=args.rho, eval_mode = eval_mode)
+                inconsistency = inconsistencyLoss(model, model_prime, images, labels, criterion, rho=args.ascent, eval_mode = eval_mode)
                 model.train()
                 outputs = model(images)
                 loss = criterion(outputs, labels) + inconsistency
                 optimizer.zero_grad()
                 loss.backward()
+                nn.utils.clip_grad_norm_(model.parameters(), 5.0)
                 optimizer.step()
+                total_inconsistency += inconsistency.item()
             elif args.optimizer == "SAM":
-                loss = SAMLoss(model, images, labels, criterion, optimizer, args.rho)
+                loss = SAMLoss(model, images, labels, criterion, optimizer, args.ascent)
             elif args.optimizer == "SGD":
                 model.train()
                 outputs = model(images)
@@ -117,7 +119,6 @@ if __name__ == "__main__":
                 optimizer.step()
 
             total_loss += loss.item()
-
         scheduler.step()
         # scheduler(epoch)
 
@@ -130,7 +131,6 @@ if __name__ == "__main__":
         error_history.append(error)
 
         if args.optimizer == "IAM":
-            total_inconsistency += inconsistency.item()
             avg_inconsistency = total_inconsistency / len(train_loader)
             inconsistency_history.append(avg_inconsistency)
             run.log({"Test Error": error, "Inconsistency": avg_inconsistency, "Loss": avg_loss,})

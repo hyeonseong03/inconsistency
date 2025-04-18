@@ -9,3 +9,4 @@ __pycache__/
 */wandb/
 IAM.py
 runs/*.sh
+runs/*.yaml
