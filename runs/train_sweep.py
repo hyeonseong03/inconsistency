@@ -37,10 +37,8 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", default=200, type=int)
     parser.add_argument("--lr", default=0.1, type=float)
     parser.add_argument("--beta", default=1.0, type=float)
+    parser.add_argument("--eval_mode", default=False, type=bool)
     args = parser.parse_args()
-
-    # eval_mode 설정 (IAM용)
-    eval_mode = False
 
     # CUDA 설정
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -51,7 +49,7 @@ if __name__ == "__main__":
         entity="hyeonseong03-hanyang-university",
         # Set the wandb project where this run will be logged.
         project="IAM",
-        name=args.optimizer+"_grad_clip_(SGD)",
+        name=args.optimizer+"_beta="+"{:.2f}".format(args.beta)+"_rho="+"{:.2f}".format(args.ascent),
         # Track hyperparameters and run metadata.
         config={
             "learning_rate": args.lr,
@@ -64,7 +62,7 @@ if __name__ == "__main__":
             "scheduler": "multistep",
             "beta": args.beta,
             "ascent": args.ascent,
-            "eval": eval_mode,
+            "eval": args.eval_mode,
             "noise": "adaptive",
         },
     )
@@ -102,7 +100,7 @@ if __name__ == "__main__":
             if args.optimizer == "IAM":
                 model.train()
                 outputs = model(images)
-                inconsistency = inconsistencyLoss(model, model_prime, images, labels, outputs, criterion, rho=args.ascent, eval_mode = eval_mode)
+                inconsistency = inconsistencyLoss(model, model_prime, images, labels, outputs, criterion, rho=args.ascent, eval_mode = args.eval_mode)
                 loss = criterion(outputs, labels) + inconsistency
                 optimizer.zero_grad()
                 loss.backward()
